@@ -407,14 +407,6 @@ test-randomorder = ["pytest-randomly"]
 tox = ["tox"]
 
 [[package]]
-name = "dataclasses"
-version = "0.6"
-description = "A backport of the dataclasses module for Python 3.6"
-category = "dev"
-optional = false
-python-versions = "*"
-
-[[package]]
 name = "deprecated"
 version = "1.2.13"
 description = "Python @deprecated decorator to deprecate old python classes, functions or methods."
@@ -472,15 +464,15 @@ python-versions = ">=3.6.0,<4.0.0"
 
 [[package]]
 name = "docspec-python"
-version = "0.2.0"
+version = "0.0.7"
 description = "A parser based on lib2to3 producing docspec data from Python source code."
 category = "dev"
 optional = false
-python-versions = ">=3.6.0,<4.0.0"
+python-versions = "*"
 
 [package.dependencies]
-dataclasses = "*"
 docspec = ">=0.2.0,<0.3.0"
+"nr.sumtype" = ">=0.0.3,<0.1.0"
 
 [[package]]
 name = "docutils"
@@ -1289,6 +1281,18 @@ python-versions = "*"
 six = ">=1.11.0,<2.0.0"
 
 [[package]]
+name = "nr-sumtype"
+version = "0.0.5"
+description = "Sumtypes in Python."
+category = "dev"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+"nr.metaclass" = ">=0.0.4,<1.0.0"
+"nr.stream" = ">=0.0.2,<1.0.0"
+
+[[package]]
 name = "nr-utils-re"
 version = "0.1.1"
 description = "This module provides some utility functions for applying regular expressions."
@@ -1408,17 +1412,16 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 
 [[package]]
 name = "pydoc-markdown"
-version = "3.13.0"
+version = "3.9.0"
 description = "Create Python API documentation in Markdown format."
 category = "dev"
 optional = false
-python-versions = ">=3.6.0,<4.0.0"
+python-versions = ">=3.5.0,<4.0.0"
 
 [package.dependencies]
 click = ">=7.0.0,<8.0.0"
-dataclasses = "*"
 docspec = ">=0.2.0,<0.3.0"
-docspec-python = ">=0.2.0,<0.3.0"
+docspec-python = ">=0.0.7,<0.1.0"
 "nr.collections" = ">=0.0.1,<0.1.0"
 "nr.databind.core" = ">=0.0.18,<0.1.0"
 "nr.databind.json" = ">=0.0.9,<0.1.0"
@@ -2113,7 +2116,7 @@ fs = []
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "001e08813383084fb38a3026529e6a3275ec51bbfbfab5cd1bfac51f9ee446b5"
+content-hash = "3e5cb5368f131f8410873623646d5f459ae1f9c989568483db39ce27ac4003d2"
 
 [metadata.files]
 adal = [
@@ -2525,10 +2528,6 @@ cryptography = [
     {file = "cryptography-40.0.1-pp39-pypy39_pp73-win_amd64.whl", hash = "sha256:cc3a621076d824d75ab1e1e530e66e7e8564e357dd723f2533225d40fe35c60c"},
     {file = "cryptography-40.0.1.tar.gz", hash = "sha256:2803f2f8b1e95f614419926c7e6f55d828afc614ca5ed61543877ae668cc3472"},
 ]
-dataclasses = [
-    {file = "dataclasses-0.6-py3-none-any.whl", hash = "sha256:454a69d788c7fda44efd71e259be79577822f5e3f53f029a22d08004e951dc9f"},
-    {file = "dataclasses-0.6.tar.gz", hash = "sha256:6988bd2b895eef432d562370bb707d540f32f7360ab13da45340101bc2307d84"},
-]
 deprecated = [
     {file = "Deprecated-1.2.13-py2.py3-none-any.whl", hash = "sha256:64756e3e14c8c5eea9795d93c524551432a0be75629f8f29e67ab8caf076c76d"},
     {file = "Deprecated-1.2.13.tar.gz", hash = "sha256:43ac5335da90c31c24ba028af536a91d41d53f9e6901ddb021bcc572ce44e38d"},
@@ -2550,8 +2549,8 @@ docspec = [
     {file = "docspec-0.2.1.tar.gz", hash = "sha256:8ff14da2cdf69a958c3e25c748d629129e38d3145cf5d0c4d55da8e6cfa0cd29"},
 ]
 docspec-python = [
-    {file = "docspec-python-0.2.0.tar.gz", hash = "sha256:61b161ccb5e6d0cc4d6ed2e127458e14becd6eae8276be2432ae380793f50468"},
-    {file = "docspec_python-0.2.0-py3-none-any.whl", hash = "sha256:a9aba8db53d22a91cc278e26256dae3b4f02c6bb11066d2a31bf500c3e489bfa"},
+    {file = "docspec-python-0.0.7.tar.gz", hash = "sha256:13af366a2dc0efdc7488f7560ad169ee80992f7f792a6b8d7ad0097bba7a27ab"},
+    {file = "docspec_python-0.0.7-py3-none-any.whl", hash = "sha256:9949eda3f964aacdf39d5c84e24a72464e7e190d982cbb2714e661124fa03524"},
 ]
 docutils = [
     {file = "docutils-0.19-py3-none-any.whl", hash = "sha256:5e1de4d849fee02c63b040a4a3fd567f4ab104defd8a5511fbbc24a8a017efbc"},
@@ -3043,6 +3042,10 @@ nr-stream = [
     {file = "nr.stream-0.0.5-py2.py3-none-any.whl", hash = "sha256:cf418a4de3cedb8622286d2baca6007a153c780af48362d1f2ef2c1993525615"},
     {file = "nr.stream-0.0.5.tar.gz", hash = "sha256:3489ce5e8174b70d194a6592248ba341fbbd5bf30c9ec5f1223a351df909f505"},
 ]
+nr-sumtype = [
+    {file = "nr.sumtype-0.0.5-py2.py3-none-any.whl", hash = "sha256:fdc2f73d4f96384ab8ae7b8094c26180c61c6f9b33eeb2e03f44ff2e3afa441d"},
+    {file = "nr.sumtype-0.0.5.tar.gz", hash = "sha256:cc01d7aa639260bc6669739ea26e4f05cb0f48ae7be7b28736f35e39e9eeea0a"},
+]
 nr-utils-re = [
     {file = "nr.utils.re-0.1.1-py2.py3-none-any.whl", hash = "sha256:eb4e6c10b074e8b296c4e2a83d0299e9a162524fb3e5e6b916dfd194688dbd06"},
     {file = "nr.utils.re-0.1.1.tar.gz", hash = "sha256:71e21300dbf890d914841f1e6d66eb4e7d6a9f01c9a20d8e83e5242c8d3140aa"},
@@ -3104,8 +3107,8 @@ pycparser = [
     {file = "pycparser-2.21.tar.gz", hash = "sha256:e644fdec12f7872f86c58ff790da456218b10f863970249516d60a5eaca77206"},
 ]
 pydoc-markdown = [
-    {file = "pydoc-markdown-3.13.0.tar.gz", hash = "sha256:1f23ebd02756664e84535969fd200ae11ca5c84329dd89539e5b603ef0e6d98f"},
-    {file = "pydoc_markdown-3.13.0-py3-none-any.whl", hash = "sha256:5b547c09862ebd64511417dc318de8a64302284389d5adf8ce130a5ca4742fe6"},
+    {file = "pydoc-markdown-3.9.0.tar.gz", hash = "sha256:2ec697561d89338fcc5f706c5b3812fc0ee90c3a189d5b9e84d78ef65b8e986a"},
+    {file = "pydoc_markdown-3.9.0-py3-none-any.whl", hash = "sha256:67501d0dbd1539b7d5119306a57db77362dc862dca46f9758be69b8409edba24"},
 ]
 pydot = [
     {file = "pydot-1.4.2-py2.py3-none-any.whl", hash = "sha256:66c98190c65b8d2e2382a441b4c0edfdb4f4c025ef9cb9874de478fb0793a451"},

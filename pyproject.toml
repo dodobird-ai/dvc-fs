@@ -46,6 +46,10 @@ gitchangelog = "^3.0.4"
 [tool.poetry.plugins."fs.opener"]
 "dvc" = "dvc_fs.fs:DVCFSOpener"
 
+
+[tool.poetry.group.dev.dependencies]
+pydoc-markdown = "3.9.0"
+
 [tool.black]
 line-length = 79
 include = '\.pyi?$'
