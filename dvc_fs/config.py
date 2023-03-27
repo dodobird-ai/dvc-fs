@@ -20,10 +20,8 @@ def get_config() -> DVCConfig:
         config = toml.load(
             os.path.join(os.path.dirname(__file__), "..", "pyproject.toml")
         )
-        extras = config["tool"]["poetry"]["extras"]["dvc"]
-        dvc_constraint = [cons for cons in extras if "dvc" in cons][0].replace(
-            "dvc", ""
-        )
+        extras = config["tool"]["poetry"]["group"]["extras"]["dependencies"]["dvc"]
+        dvc_constraint = extras["version"]
         _pyproject_config = DVCConfig(
             dvc_version_constraint=SimpleSpec(dvc_constraint),
         )
