@@ -301,7 +301,7 @@ class DVCFile:
                 )
             else:
                 self.client._repo_cache = clone_repo(
-                    self.dvc_repo, repo=self.client._repo_cache
+                    self.dvc_repo, existing_file_path=self.existing_file_path,repo=self.client._repo_cache
                 )
                 if os.path.isfile(
                     os.path.join(
@@ -347,6 +347,7 @@ class Client:
         dvc_repo: str,
         temp_path: Optional[str] = None,
         clone_branch:Optional[str]=None,
+        existing_file_path: Optional[str] = None,
     ):
         """
         :param dvc_repo: Clone URL for the GIT repo that has DVC configured
@@ -375,7 +376,7 @@ class Client:
         :returns: Time of last modification of the given files
         """
         self._repo_cache = clone_repo(
-            self.dvc_repo, self.temp_path, repo=self._repo_cache
+            self.dvc_repo, self.temp_path,existing_file_path=self.existing_file_path, repo=self._repo_cache
         )
         commits = list(
             self._repo_cache.repo.iter_commits(
@@ -432,7 +433,7 @@ class Client:
         if path.startswith("/"):
             path = path[1:]
         self._repo_cache = clone_repo(
-            self.dvc_repo, self.temp_path, repo=self._repo_cache
+            self.dvc_repo, self.temp_path, existing_file_path=self.existing_file_path, repo=self._repo_cache
         )
         search_path = os.path.join(self._repo_cache.clone_path, path)
         entities = [
@@ -520,7 +521,7 @@ class Client:
 
         LOGS.dvc_hook.info("Remove files from DVC")
         self._repo_cache = clone_repo(
-            self.dvc_repo, self.temp_path, repo=self._repo_cache
+            self.dvc_repo, self.temp_path, existing_file_path=self.existing_file_path, repo=self._repo_cache
         )
         for file in removed_files:
             self._repo_cache.dvc.remove(file)
@@ -596,7 +597,7 @@ class Client:
 
         LOGS.dvc_hook.info("Add files to DVC")
         self._repo_cache = clone_repo(
-            self.dvc_repo, self.temp_path, repo=self._repo_cache
+            self.dvc_repo, self.temp_path, existing_file_path=self.existing_file_path,repo=self._repo_cache
         )
         for file in updated_files:
             with file as input_file:
