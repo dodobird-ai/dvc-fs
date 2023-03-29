@@ -77,7 +77,7 @@ def clone_repo(
     :returns: Cloned repo access object
     """
     if existing_file_path and os.path.exists(existing_file_path):
-        dvc = DVCLocalCli(clone_path)
+        dvc = DVCLocalCli(existing_file_path)
         return ClonedRepo(
             clone_path=existing_file_path,
             temp_dir=tempfile.TemporaryDirectory(dir=existing_file_path,delete=False),
