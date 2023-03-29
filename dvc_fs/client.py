@@ -355,6 +355,7 @@ class Client:
         super().__init__()
         self.dvc_repo = dvc_repo
         self.temp_path = temp_path
+        self.existing_file_path = existing_file_path
 
     def cleanup(self):
         LOGS.dvc_hook.info("Perform cleanup")
