@@ -45,6 +45,9 @@ class DVCCommit:
     sha: str  # Commit sha
     commit_url: str  # Commit URL
 
+@dataclass
+class StaticDirectory:
+    name: str
 
 @dataclass
 class ClonedRepo:
@@ -53,9 +56,14 @@ class ClonedRepo:
     """
 
     clone_path: str  # Path to the clone directory
-    temp_dir: tempfile.TemporaryDirectory  # Temporary directory object pointing to the clone path
+    temp_dir: tempfile.TemporaryDirectory or StaticDirectory  # Temporary directory object pointing to the clone path
     repo: Repo  # Git repo handler
     dvc: DVCLocalCli  # DVC interface
+
+    # temp directory has the default cleanup method, but for static directories this cannot be done
+    def cleanup(self):
+         LOGS.dvc.info(f"Cleaning up {self.name} is not possible for static directories")
+         pass
 
 
 EXCLUDED_GIT_SEARCH_DIRECTORIES = [
@@ -80,7 +88,7 @@ def clone_repo(
         dvc = DVCLocalCli(existing_file_path)
         return ClonedRepo(
             clone_path=existing_file_path,
-            temp_dir=tempfile.TemporaryDirectory(dir=existing_file_path,delete=False),
+            temp_dir=StaticDirectory(name=existing_file_path),
             repo=Repo(existing_file_path),
             dvc=dvc,
         )
